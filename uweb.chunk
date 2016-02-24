@@ -1,0 +1,37 @@
+<div class="chunk top">
+  <a name="<%= name.idify %>"></a>
+  <span class="chunk name"><%= name %></span>
+  <div class="chunk locations">
+    <span class="chunk locations title">Location(s):</span>
+    <% locations.each_with_index do |location, index| %>
+      <% if index > 0 %>
+        ,
+      <% end %>
+      <span class="chunk location">
+        <span class="chunk location file">
+          <%= location.path %>
+        </span>
+        <span class="chunk location lines">
+          (<%= location.first_line %> - <%= location.last_line %>)
+        </span>
+      </span>
+    <% end %>
+  </div>
+  <% if nested_in %>
+    <div class="chunk nested_in">
+      <span class="chunk nested_in title">
+        Nested in:
+      </span>
+      <% nested_in.each_with_index do |nested_name, index| %>
+        <% if index > 0 %>
+          ,
+        <% end %>
+        <a class="chunk nested_in" href="#<%= nested_name.idify %>">
+          <%= nested_name %>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+<pre class="chunk lines"><% lines.each do |line| %><%= line %>
+<% end %></pre>
+</div>
