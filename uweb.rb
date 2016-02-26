@@ -7,7 +7,7 @@ $usage = %Q{
 
 == NAME
 
-`uweb` - Micro HTML based inverse literate programming tool.
+uweb - Micro HTML based inverse literate programming tool.
 
 == USAGE
 
