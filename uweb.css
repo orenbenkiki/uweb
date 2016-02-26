@@ -1,0 +1,6 @@
+* { font-family: sans-serif; }
+span.chunk.name { font-weight: bold; }
+span.chunk.location { font-style: italic; }
+pre { font-family: monospace; }
+tt { font-family: monospace; }
+code { font-family: monospace; }

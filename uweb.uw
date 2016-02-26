@@ -1,0 +1,100 @@
+<html>
+<head>
+<link rel="stylesheet" href="uweb.css">
+<link rel='source' href='uweb.rb'>
+</head>
+<body>
+<h1>uweb</h1>
+
+<p>This describes the internals of the <tt>uweb</tt> program. It also serves as
+an example on how to write files using it. See the <tt>uweb</tt> manual page
+for a description of the command line flags, input format, etc.</p>
+
+<h2>Requirements</h2>
+
+<p>The program requires very few gems, most notably <tt>erb</tt>. It also
+supports being compiled into a standalone binary using <tt>rubyscript2exe</tt>.
+
+<a rel='chunk' name='Requirements'/>
+
+<h2>Main Program</h2>
+
+<p>The main program is pretty boring: parse command line, load templates,
+process input, done.</p>
+
+<a rel='chunk' name='Main program'/>
+
+<h3>Usage</h3>
+
+<p>Since <tt>RDoc::usage</tt> is no longer with us, we provide our own version.
+The output is in valid <a href="http://asciidoc.org">AsciiDoc</a> format and
+can be passed to <a href="http://asciidoctor.org">asciidoctor</a> to generate a
+manual page or an HTML file.<p>
+
+<a rel='chunk' name='Usage'/>
+
+<h2>Loading templates</h2>
+
+<p>We let <tt>erb</tt> do the heavy lifting for us here.</p>
+
+<a rel='chunk' name='Loading templates'/>
+
+<h2>Processing input</h2>
+
+<p>We simply scan the input one line at a time, comparing them with the
+pre-established patterns.</p>
+
+<a rel='chunk' name='Processing input'/>
+
+<p>The patterns we look for in the input X/HTML files are:</p>
+
+<a rel='chunk' name='Input patterns'/>
+
+<h3>Scanning sources</h3>
+
+<p>We also scan any sources the X/HTML input links to:</p>
+
+<a rel='chunk' name='Scanning sources'/>
+
+<p>The patterns we look for in the source files are:</p>
+
+<a rel='chunk' name='Source patterns'/>
+
+<h2>Detecting Patterns</h2>
+
+<p>A pattern is just a glorified regular expression. There is some trickiness
+in using global state to decide whether to complain or ignore "bad" lines, used
+to implement the special <tt>!uweb</tt> section.</p>
+
+<a rel='chunk' name='Detecting patterns'/>
+
+<h2>Embedding chunks</h2>
+
+<p>The whole point of the program is to embed chunks of sources into the generated X/HTML:<p>
+
+<a rel='chunk' name='Embedding chunks'/>
+
+<h3>Tracking chunks</h3>
+
+<p>To support the above, we need to track all the chunks we extracted in the source files:</p>
+
+<a rel='chunk' name='Tracking chunks'/>
+
+<p>To generate a nice output and better error messages, we also need to track, for each chunk,
+the location(s) it appeared in the source:
+
+<a rel='chunk' name='Tracking locations'/>
+
+<p>Since a chunk can appear in multiple locations, we have a distinct notion of a chunk instance:</p>
+
+<a rel='chunk' name='Tracking chunk instances'/>
+
+<h2>Monkey patching</h2>
+
+<p>To support all the above, we monkey-patch the <tt>Array</tt> and <tt>String</tt> classes, adding
+useful methods to them:</p>
+
+<a rel='chunk' name='Monkey patching'/>
+
+</body>
+</html>
